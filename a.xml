@@ -1,0 +1,97 @@
+  <mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="en">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <dbname>enwiki</dbname>
+    <base>https://en.wikipedia.org/wiki/Main_Page</base>
+    <generator>MediaWiki 1.34.0-wmf.16</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+      <namespace key="5" case="first-letter">Wikipedia talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="12" case="first-letter">Help</namespace>
+      <namespace key="13" case="first-letter">Help talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="100" case="first-letter">Portal</namespace>
+      <namespace key="101" case="first-letter">Portal talk</namespace>
+      <namespace key="108" case="first-letter">Book</namespace>
+      <namespace key="109" case="first-letter">Book talk</namespace>
+      <namespace key="118" case="first-letter">Draft</namespace>
+      <namespace key="119" case="first-letter">Draft talk</namespace>
+      <namespace key="446" case="first-letter">Education Program</namespace>
+      <namespace key="447" case="first-letter">Education Program talk</namespace>
+      <namespace key="710" case="first-letter">TimedText</namespace>
+      <namespace key="711" case="first-letter">TimedText talk</namespace>
+      <namespace key="828" case="first-letter">Module</namespace>
+      <namespace key="829" case="first-letter">Module talk</namespace>
+      <namespace key="2300" case="first-letter">Gadget</namespace>
+      <namespace key="2301" case="first-letter">Gadget talk</namespace>
+      <namespace key="2302" case="case-sensitive">Gadget definition</namespace>
+      <namespace key="2303" case="case-sensitive">Gadget definition talk</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Gavin Turek</title>
+    <ns>0</ns>
+    <id>42567249</id>
+    <revision>
+      <id>851847776</id>
+      <parentid>829501612</parentid>
+      <timestamp>2018-07-25T00:31:21Z</timestamp>
+      <contributor>
+        <username>Ser Amantio di Nicolao</username>
+        <id>753665</id>
+      </contributor>
+      <comment>/* External links */add authority control, test using [[Project:AWB|AWB]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{Infobox person
+| name                      = Gavin Turek
+| image                     =
+| birth_place               = {{nowrap|[[Los Angeles, California]], [[United States]]}}
+| occupation                = {{hlist|Singer|songwriter|dancer|model|actress}}
+| module = {{Infobox musical artist|embed=yes
+| background = solo_singer &lt;!-- mandatory field--&gt;
+| genre = {{hlist|[[Disco]]|[[Dance music|dance]]}}
+| website                   = {{URL|gavinturek.com}}
+}}
+| labels                        = Young Art Records
+}}
+'''Gavin Turek''' is a singer, songwriter, dancer, and actress from [[Los Angeles, California]].
+
+==Life and career==
+Turek has performed at iconic venues such as [[The Troubadour, London|The Troubadour]], [[Hollywood Bowl]], [[Palladium (New York City)|Palladium]] and [[El Rey Theatre|El Rey]]. In April 2015, she released her single &quot;Frontline&quot;, a homage to [[Donna Summer]] and the B-side &quot;Don't Fight It&quot; via 1nfinity/Iheartcomix which was remixed by Grammy nominated producer starRo. In August 2015, she released an [[extended play]] with her longtime collaborator and friend [[Tokimonsta]], whom she met years ago via their [[Myspace]] music pages. The EP ''You're Invited'' is written by Gavin Turek and produced by Tokimonsta, and was released via Young Art Records. Turek is also known for her work with [[Mayer Hawthorne]], most recently as a member of his band Tuxedo. In the summer of 2015, she toured the East and West Coast with Tuxedo for a string of sold out dates, along with Tokimonsta.
+
+''[[Billboard (magazine)|Billboard]]'' magazine debuted the Tokimonsta's remix of Gavin Turek's single &quot;Frontline&quot; and announced their upcoming EP, with two songs, &quot;Hemisphere&quot; and &quot;Surrender&quot;, being released.&lt;ref&gt;{{cite web|title=Tokimonsta Remixes Gavin Turek's 'Frontline,' Announces Joint EP: Exclusive|url=http://www.billboard.com/articles/news/dance/6576157/tokimonsta-remix-gavin-tureks-frontline-joint-ep-exclusive|publisher=''[[Billboard (magazine)|Billboard]]''|last=Buerger|first=Megan|date=May 27, 2015|accessdate=August 21, 2015}}&lt;/ref&gt; [[Spin Magazine]] named her top 5 artists to watch for in July 2015.&lt;ref&gt;{{cite web|title=Five Artists to Watch in July 2015|url=http://www.spin.com/2015/07/five-artists-to-watch-july-2015-bad-bad-hats-gavin-turek-milk-moses-sumney-strange-wilds-list/|publisher=''[[Spin (magazine)|Spin]]''|date=July 7, 2015|accessdate=August 21, 2015}}&lt;/ref&gt; She was called &quot;LA's Disco Queen of the Moment&quot; by Revolt TV,&lt;ref&gt;{{cite web|title=Artist Spotlight: Gavin Turek Is Disco's Queen Of The Moment|url=http://revolt.tv/news/artist-spotlight-gavin-turek-is-discos-queen-of-the-moment/FB5FC39B-52B0-42CC-B0D0-685E9EB9EEB8|accessdate=August 21, 2015}}&lt;/ref&gt; and was &quot;On the Verge of Fame&quot; by [[LA Weekly]].&lt;ref&gt;{{cite web|title=Gavin Turek Turns Heartbreak Into Dance Music|url=http://www.laweekly.com/music/gavin-turek-turns-heartbreak-into-dance-music-4166281|publisher=''[[LA Weekly]]''|last=Bain|first=Katie|date=September 12, 2013|accessdate=August 21, 2015}}&lt;/ref&gt;
+
+==References==
+{{reflist}}
+{{Reflist|30em}}
+{{South African military decorations and medals}}
+
+==External links==
+* [http://www.gavinturek.com Official website]
+*{{Instagram|gavinturek}}
+
+{{authority control}}
+
+{{DEFAULTSORT:Turek, Gavin}}
+[[Category:Living people]]
+[[Category:American female singers]]
+[[Category:American actresses]]
+[[Category:Year of birth missing (living people)]]</text>
+      <sha1>e4wad1a41pc2mer3iqpfrfk40qtk227</sha1>
+    </revision>
+  </page>
