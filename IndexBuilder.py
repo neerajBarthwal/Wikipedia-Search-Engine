@@ -1,12 +1,13 @@
 from FileHandler import FileHandler
 import gc
+from _collections import defaultdict
 
 class IndexBuilder:
     
     INDEX_ROOT_DIR = "/home/neeraj/IRE"
     
     def __init__(self):
-        self.index = {}
+        self.index = defaultdict(list)
         self.vocab = []
         self.indexFileNumber = 0
         self.writeCounter = 0 
@@ -51,17 +52,30 @@ class IndexBuilder:
         
         #t,b,i,c,e,r = len(titleTermFreq), len(bodyTermFreq), len(infoBoxTermFreq), len(categoryTermFreq), len(externalLinksTermFreq), len(referencesTermFreq)
         for word in self.vocab:
-            #gc.disable()
+            gc.disable()
             entry = self.makeIndexEntryForWord(docId,titleTermFreq[word],bodyTermFreq[word],infoBoxTermFreq[word],
                                                categoryTermFreq[word],externalLinksTermFreq[word],
                                                referencesTermFreq[word])
-            self.index[word] = entry
-            #gc.enable()
-        self.writeCounter+=1
-        #print(self.writeCounter)
-        if self.writeCounter%7000==0:
-            self.fileIO.writeIndexToDisk(IndexBuilder.INDEX_ROOT_DIR,self.index, self.indexFileNumber)
-            self.fileIO.writeDocIdTitleMappingToDisk(IndexBuilder.INDEX_ROOT_DIR,docIdTitleMapping)
-            self.indexFileNumber+=1
+            self.index[word].append(entry)
+            gc.enable()
+        
+            
+    def buildIndexBulk(self,processedTextBulk,processedTitleBulk,docIdTitleMapping):
+        
+        for docId in processedTextBulk.keys():
+            gc.disable()
+            bodyTermFreq = processedTextBulk[docId]['b']
+            infoBoxTermFreq = processedTextBulk[docId]['i']
+            categoryTermFreq = processedTextBulk[docId]['c']
+            externalTermFreq = processedTextBulk[docId]['e']
+            referenceTermFreq = processedTextBulk[docId]['r']
+            titleTermFreq = processedTitleBulk[docId]
+            self.buildIndex(docId, titleTermFreq, bodyTermFreq, infoBoxTermFreq, categoryTermFreq, 
+                            externalTermFreq, referenceTermFreq, docIdTitleMapping)
+            gc.enable()
+            
+        self.fileIO.writeIndexToDisk(IndexBuilder.INDEX_ROOT_DIR,self.index, self.indexFileNumber)
+        self.fileIO.writeDocIdTitleMappingToDisk(IndexBuilder.INDEX_ROOT_DIR,docIdTitleMapping)
+        self.indexFileNumber+=1
             
         

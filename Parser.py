@@ -1,7 +1,7 @@
 import xml.sax.handler
 from TextProcessor import TextProcessor
 from IndexBuilder import IndexBuilder
-import timeit
+import time
 import gc
 class DataHandler(xml.sax.handler.ContentHandler):
 
@@ -74,15 +74,23 @@ class DataHandler(xml.sax.handler.ContentHandler):
             self.idFound = False
         elif name == "title":
             self.titleFound = False
-            self.titleTermFreq = self.textProcessor.processTitle(self.title)
+            #self.titleTermFreq = self.textProcessor.processTitle(self.title)
             
         elif name=="text":
             self.textFound = False
             self.text = self.text.lower()
             self.docIdToTextMapping[self.docIdCounter] = self.text
             self.docIdCounter+=1
-            self.bodyTermFreq, self.infoBoxTermFreq, self.categoryTermFreq,self.externalLinkTermFreq, self.referenceTermFreq = self.textProcessor.processText(self.text)
-            self.indexBuilder.buildIndex(self.docIdCounter,self.titleTermFreq, self.bodyTermFreq, self.infoBoxTermFreq, self.categoryTermFreq, self.infoBoxTermFreq, self.referenceTermFreq,self.docIdTitleMapping)
+#             if(self.docIdCounter%50==0):
+#                 processedTitleBulk = self.textProcessor.processTitleBulk(self.docIdTitleMapping)
+#                 processedTextBulk = self.textProcessor.processTextBulk(self.docIdToTextMapping)
+#                 self.indexBuilder.buildIndexBulk(processedTextBulk,processedTitleBulk,self.docIdTitleMapping)
+#                 self.docIdToTextMapping={}
+#                 self.docIdTitleMapping={}
+#                 stopTime = timeit.default_timer()
+#                 print(stopTime - startTime)
+            #self.bodyTermFreq, self.infoBoxTermFreq, self.categoryTermFreq,self.externalLinkTermFreq, self.referenceTermFreq = self.textProcessor.processText(self.text)
+            #self.indexBuilder.buildIndex(self.docIdCounter,self.titleTermFreq, self.bodyTermFreq, self.infoBoxTermFreq, self.categoryTermFreq, self.infoBoxTermFreq, self.referenceTermFreq,self.docIdTitleMapping)
            
             
         elif name=="page":
@@ -91,24 +99,25 @@ class DataHandler(xml.sax.handler.ContentHandler):
 def main():
     
 #     if len(sys.argv)!=3:
-#         print("Invalid Input.\n Correct Usage: python Parser.py <path_of_xml_dump> <path_of_output>")
-    
+#         print("Invalid Input.\n Correct Usage: python Parser.py <path_of_xml_dump> <path_of_output>") 
     xmlparser = xml.sax.make_parser()
     handler = DataHandler()
     xmlparser.setContentHandler(handler)
     xmlparser.parse("dump.xml-p42567204p42663461")
     #xmlparser.parse("a.xml")
+    processedTitleBulk = handler.textProcessor.processTitleBulk(handler.docIdTitleMapping)
+    processedTextBulk = handler.textProcessor.processTextBulk(handler.docIdToTextMapping)
+    handler.indexBuilder.buildIndexBulk(processedTextBulk,processedTitleBulk,handler.docIdTitleMapping)
+    handler.docIdToTextMapping={}
+    handler.docIdTitleMapping={}
+    
     
 if __name__ == "__main__":
-    gc.disable()
-    global start 
-    start= timeit.default_timer()
+    #gc.disable()
+    startTime= time.clock()
     main()
-    
-    stop = timeit.default_timer()
-    print(stop - start)
-    
-       
+    stopTime = time.clock()
+    print(stopTime - startTime)   
             
             
             
