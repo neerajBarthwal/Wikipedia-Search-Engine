@@ -2,7 +2,7 @@ import xml.sax.handler
 from TextProcessor import TextProcessor
 from IndexBuilder import IndexBuilder
 import time
-import gc
+
 class DataHandler(xml.sax.handler.ContentHandler):
 
     '''
@@ -60,8 +60,6 @@ class DataHandler(xml.sax.handler.ContentHandler):
         elif self.titleFound:
             self.title+=content
             self.docIdTitleMapping[self.docIdCounter] = content
-#             if(self.docIdCounter%10==0):
-#                 print(self.docIdTitleMapping)
         
         elif self.textFound:
             self.text+=content
@@ -81,36 +79,48 @@ class DataHandler(xml.sax.handler.ContentHandler):
             self.text = self.text.lower()
             self.docIdToTextMapping[self.docIdCounter] = self.text
             self.docIdCounter+=1
-#             if(self.docIdCounter%50==0):
-#                 processedTitleBulk = self.textProcessor.processTitleBulk(self.docIdTitleMapping)
-#                 processedTextBulk = self.textProcessor.processTextBulk(self.docIdToTextMapping)
-#                 self.indexBuilder.buildIndexBulk(processedTextBulk,processedTitleBulk,self.docIdTitleMapping)
-#                 self.docIdToTextMapping={}
-#                 self.docIdTitleMapping={}
-#                 stopTime = timeit.default_timer()
-#                 print(stopTime - startTime)
-            #self.bodyTermFreq, self.infoBoxTermFreq, self.categoryTermFreq,self.externalLinkTermFreq, self.referenceTermFreq = self.textProcessor.processText(self.text)
-            #self.indexBuilder.buildIndex(self.docIdCounter,self.titleTermFreq, self.bodyTermFreq, self.infoBoxTermFreq, self.categoryTermFreq, self.infoBoxTermFreq, self.referenceTermFreq,self.docIdTitleMapping)
-           
+            if(self.docIdCounter%5000==0):
+                processedTitleBulk = self.textProcessor.processTitleBulk(self.docIdTitleMapping)
+                processedTextBulk = self.textProcessor.processTextBulk(self.docIdToTextMapping)
+                self.indexBuilder.buildIndexBulk(processedTextBulk,processedTitleBulk,self.docIdTitleMapping)
+                print("Total docs parsed: ",self.docIdCounter)
+                self.docIdToTextMapping={}
+                self.docIdTitleMapping={} 
+                              
             
         elif name=="page":
             DataHandler.flag = False
 
 def main():
     
+    
 #     if len(sys.argv)!=3:
 #         print("Invalid Input.\n Correct Usage: python Parser.py <path_of_xml_dump> <path_of_output>") 
     xmlparser = xml.sax.make_parser()
     handler = DataHandler()
     xmlparser.setContentHandler(handler)
-    xmlparser.parse("dump.xml-p42567204p42663461")
+    xmlparser.parse("enwiki-latest-pages-articles.xml")
     #xmlparser.parse("a.xml")
     processedTitleBulk = handler.textProcessor.processTitleBulk(handler.docIdTitleMapping)
     processedTextBulk = handler.textProcessor.processTextBulk(handler.docIdToTextMapping)
-    handler.indexBuilder.buildIndexBulk(processedTextBulk,processedTitleBulk,handler.docIdTitleMapping)
+    totalIndexFiles = handler.indexBuilder.buildIndexBulk(processedTextBulk,processedTitleBulk,handler.docIdTitleMapping)
     handler.docIdToTextMapping={}
     handler.docIdTitleMapping={}
     
+    handler.indexBuilder.fileIO.mergeIndexes('/home/aman/neeraj/run/index',totalIndexFiles)
+     
+    with open('/home/aman/neeraj/run/index/numberOfFiles.txt','w') as nof:
+        nof.write(str(handler.docIdCounter))
+     
+    docIdTitleOffset = []
+    with open('/home/aman/neeraj/run/index/title.txt','r') as titleHandle:
+        docIdTitleOffset.append('0')
+        for line in titleHandle:
+            docIdTitleOffset.append(str(int(docIdTitleOffset[-1]) + len(line.encode('utf-8'))))
+    docIdTitleOffset = docIdTitleOffset[:-1]
+     
+    with open('/home/aman/neeraj/run/index/titleOffset.txt','w') as offsetHandle:
+        offsetHandle.write('\n'.join(docIdTitleOffset)) 
     
 if __name__ == "__main__":
     #gc.disable()

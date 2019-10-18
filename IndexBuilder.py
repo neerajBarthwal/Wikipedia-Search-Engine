@@ -4,7 +4,7 @@ from _collections import defaultdict
 
 class IndexBuilder:
     
-    INDEX_ROOT_DIR = "/home/neeraj/IRE"
+    INDEX_ROOT_DIR = "/home/aman/neeraj/run/index"
     
     def __init__(self):
         self.index = defaultdict(list)
@@ -50,12 +50,45 @@ class IndexBuilder:
         
         self.vocab = self.getVocabForDocument(titleTermFreq, bodyTermFreq, infoBoxTermFreq, categoryTermFreq, externalLinksTermFreq, referencesTermFreq)
         
-        #t,b,i,c,e,r = len(titleTermFreq), len(bodyTermFreq), len(infoBoxTermFreq), len(categoryTermFreq), len(externalLinksTermFreq), len(referencesTermFreq)
+        titleLength = len(titleTermFreq)
+        bodyLength = len(bodyTermFreq)
+        infoBoxLength = len(infoBoxTermFreq)
+        catLength = len(categoryTermFreq)
+        extLength = len(externalLinksTermFreq)
+        refLength = len(referencesTermFreq)
         for word in self.vocab:
             gc.disable()
-            entry = self.makeIndexEntryForWord(docId,titleTermFreq[word],bodyTermFreq[word],infoBoxTermFreq[word],
-                                               categoryTermFreq[word],externalLinksTermFreq[word],
-                                               referencesTermFreq[word])
+            try:
+                titleTF = round(float(titleTermFreq[word]/titleLength),4)
+            except Exception:
+                titleTF = '0.0'
+                
+            try:
+                bodyTF = round(float(bodyTermFreq[word]/bodyLength),4)
+            except Exception:
+                bodyTF = '0.0'
+                
+            try:
+                infoTF = round(float(infoBoxTermFreq[word]/infoBoxLength),4)
+            except Exception:
+                infoTF = '0.0'
+            
+            try:
+                catTF = round(float(categoryTermFreq[word]/catLength),4)
+            except Exception:
+                catTF = '0.0'
+            
+            try:
+                extTF = round(float(externalLinksTermFreq[word]/extLength),4)
+            except Exception:
+                extTF = '0.0'
+                
+            try:
+                refTF = round(float(referencesTermFreq[word]/refLength),4)
+            except Exception:
+                refTF = '0.0'
+                
+            entry = self.makeIndexEntryForWord(docId,titleTF,bodyTF,infoTF,catTF,extTF,refTF)
             self.index[word].append(entry)
             gc.enable()
         
@@ -76,6 +109,7 @@ class IndexBuilder:
             
         self.fileIO.writeIndexToDisk(IndexBuilder.INDEX_ROOT_DIR,self.index, self.indexFileNumber)
         self.fileIO.writeDocIdTitleMappingToDisk(IndexBuilder.INDEX_ROOT_DIR,docIdTitleMapping)
+        self.index = defaultdict(list)
         self.indexFileNumber+=1
-            
+        return self.indexFileNumber
         
